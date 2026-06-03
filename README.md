@@ -2,7 +2,7 @@
 ---
 **TMSRendon** is an enterprise-grade Transportation Management System (TMS), Enterprise Resource Planning (ERP), Client Relationship Management (CRM), and Warehouse Management System (WMS) built specifically for terrestrial logistics and cargo transport companies in Mexico (handling trucks, tortons, and heavy transport units).
 
-This repository is designed as a **Modular Monolith** and is built to be developed fast, reliably, and efficiently by a 2-developer team coupled with AI Code Agents.
+This repository is designed as a **Modular Monolith** and is built to be developed fast, reliably.
 
 ---
 
@@ -67,7 +67,7 @@ Every external API write operation (such as invoice timbrado) must include an `I
 
 ---
 
-## 🚀 Setup & Execution Guide
+## Setup & Execution Guide
 
 ### Prerequisities
 *   Node.js v20+
@@ -114,11 +114,3 @@ Under Mexican tax law, all terrestrial cargo transportation must be backed by a 
     *   *ClaveProdServ* (Product/Service Keys) and *ClaveUnidad* (Unit Keys).
     *   *Configuración Vehicular* (SCT truck layout code) and *Permiso SCT*.
 *   **Security:** PDF/XML outputs are stored securely in Supabase Storage with metadata indexed in PostgreSQL for auditing.
-
----
-
-## AI Code Agent Guidelines
-
-To coordinate efficiently between human developers and AI Code Agents, please refer to **[AGENTS.md](file:///home/bjs/Repositories/TMSRendon/AGENTS.md)**. 
-*   **Code Style:** Keep standard TypeScript styles, maintain validation decorators, and ensure that new modules are fully self-contained.
-*   **Integrity:** Always preserve existing comments, structure, and type mappings unless explicitly told otherwise.
