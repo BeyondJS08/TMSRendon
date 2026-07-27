@@ -1,8 +1,8 @@
-# TMSRendon (TMS + ERP + CRM + WMS)
----
-**TMSRendon** is an enterprise-grade Transportation Management System (TMS), Enterprise Resource Planning (ERP), Client Relationship Management (CRM), and Warehouse Management System (WMS) built specifically for terrestrial logistics and cargo transport companies in Mexico (handling trucks, tortons, and heavy transport units).
+# TMSRendon (TMS + ERP + IMS)
 
-This repository is designed as a **Modular Monolith** and is built to be developed fast, reliably.
+---
+
+**TMSRendon** is an enterprise-grade Transportation Management System (TMS), Enterprise Resource Planning (ERP) and Inventory Management System (IMS) built specifically for terrestrial logistics and cargo transport company in Mexico named TransRendon (handling trucks, tortons, and heavy transport units).
 
 ---
 
@@ -23,7 +23,9 @@ TMSRendon/
 │   ├── components/           # UI Elements (shadcn/ui + Tailwind v4)
 │   └── package.json
 ├── .env                      # Global Environment Variables
-└── AGENTS.md                 # System Guidelines for AI Code Agents
+├── AGENTS.md                 # System Guidelines for AI Code Agents
+├── README.md                  # Project Overview & Setup Instructions
+└── CLAUDE.md                  # Project Overview for Claude AI Agent
 ```
 
 ---
@@ -72,14 +74,40 @@ Every external API write operation (such as invoice timbrado) must include an `I
 ### Prerequisities
 *   Node.js v20+
 *   pnpm (v9+ recommended)
-*   Docker or Podman (for running database & Redis locally)
+*   Docker or Podman (for running database & Redis locally, optional if using hosted Supabase)
+*   A Supabase project (for Auth and PostgreSQL)
 
 ### 1. Database & Caching Setup
-1.  Ensure you have Docker/Podman running.
-2.  Spin up the local PostgreSQL + PostGIS and Redis services (or point to your Supabase Self-Hosted instance).
-3.  Configure your `.env` variables at the root of the project.
+1.  Ensure you have Docker/Podman running if you are using the local Supabase stack.
+2.  Spin up the local PostgreSQL + PostGIS and Redis services (or point to your Supabase-hosted instance).
+3.  Configure your environment variables (see step 2).
 
-### 2. Prisma Database Schema
+### 2. Environment Variables
+
+Create the following env files:
+
+**Root `.env`** (used by Prisma):
+```env
+DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:54322/postgres?schema=public"
+```
+
+**`frontend-tms/.env.local`**:
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://<your-project>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-anon-key>
+```
+
+**`backend-tms/.env`**:
+```env
+PORT=8080
+DATABASE_URL="postgresql://postgres:postgres@127.0.0.1:54322/postgres?schema=public"
+SUPABASE_URL=https://<your-project>.supabase.co
+SUPABASE_ANON_KEY=<your-anon-key>
+SUPABASE_JWT_ISSUER=https://<your-project>.supabase.co/auth/v1
+SUPABASE_JWT_AUDIENCE=authenticated
+```
+
+### 3. Prisma Database Schema
 Generate the database client and apply migrations:
 ```bash
 # From the root directory
@@ -87,7 +115,7 @@ npx prisma generate
 npx prisma db push
 ```
 
-### 3. Running Backend (NestJS)
+### 4. Running Backend (NestJS)
 ```bash
 cd backend-tms
 pnpm install
@@ -95,13 +123,19 @@ pnpm run start:dev
 ```
 The backend API will run on `http://localhost:8080` (or configured port). Access API Docs at `/api/docs`.
 
-### 4. Running Frontend (Next.js)
+### 5. Running Frontend (Next.js)
 ```bash
 cd frontend-tms
 pnpm install
 pnpm run dev
 ```
 The client app will be accessible at `http://localhost:3000`.
+
+### 6. Auth Flow
+1.  Visit `http://localhost:3000/login`.
+2.  Sign up with email/password (handled by Supabase Auth).
+3.  Log in; you will be redirected to `/dashboard`.
+4.  The dashboard calls the backend with the Supabase access token; the backend validates the token via Supabase JWKS.
 
 ---
 

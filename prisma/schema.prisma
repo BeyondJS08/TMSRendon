@@ -1,13 +1,172 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider   = "postgresql"
+  extensions = [pg_net, pg_stat_statements, pgcrypto, postgis, supabase_vault, uuid_ossp(map: "uuid-ossp")]
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  legalName String?
+  taxId     String? // RFC for Mexico
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  users     User[]
+  locations Location[]
+  auditLogs AuditLog[]
+  roles     Role[]
+
+  @@index([taxId])
+  @@index([deletedAt])
+}
+
+model User {
+  id        String   @id // Matches auth.users.id from Supabase Auth
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  roles     UserRole[]
+  auditLogs AuditLog[]
+
+  @@index([organizationId])
+  @@index([deletedAt])
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  users       UserRole[]
+  permissions RolePermission[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId])
+}
+
+model Permission {
+  id          String @id @default(cuid())
+  resource    String // e.g. "trips", "invoices"
+  action      String // e.g. "create", "read", "update", "delete"
+  description String?
+
+  roles RolePermission[]
+
+  @@unique([resource, action])
+  @@index([resource])
+}
+
+model UserRole {
+  id     String @id @default(cuid())
+  userId String
+  roleId String
+  user   User   @relation(fields: [userId], references: [id])
+  role   Role   @relation(fields: [roleId], references: [id])
+
+  @@unique([userId, roleId])
+  @@index([userId])
+  @@index([roleId])
+}
+
+model RolePermission {
+  id           String     @id @default(cuid())
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@unique([roleId, permissionId])
+  @@index([roleId])
+  @@index([permissionId])
+}
+
+model Location {
+  id           String   @id @default(cuid())
+  name         String?
+  street       String?
+  extNumber    String?
+  intNumber    String?
+  neighborhood String?
+  city         String?
+  state        String?
+  zipCode      String?
+  country      String   @default("MEX")
+  coordinates  Unsupported("extensions.geometry(Point, 4326)")?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@index([organizationId])
+  @@index([deletedAt])
+  @@index([country, state, city])
+}
+
+model ContactInfo {
+  id        String      @id @default(cuid())
+  type      ContactType
+  value     String
+  label     String? // "work", "mobile", "billing"
+  isPrimary Boolean     @default(false)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  deletedAt DateTime?
+
+  // Polymorphic-ish link to owners via ownerId + ownerType
+  ownerId   String
+  ownerType String // "Customer", "Driver", "Organization", etc.
+
+  @@index([ownerId, ownerType])
+  @@index([deletedAt])
+}
+
+enum ContactType {
+  EMAIL
+  PHONE
+}
+
+model AuditLog {
+  id            String   @id @default(cuid())
+  tableName     String
+  recordId      String
+  action        String // INSERT | UPDATE | DELETE
+  oldValues     Json?
+  newValues     Json?
+  performedById String?
+  performedBy   User?    @relation(fields: [performedById], references: [id])
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@index([tableName, recordId])
+  @@index([organizationId, createdAt])
+  @@index([performedById])
 }

@@ -23,57 +23,69 @@ export function SignupForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Create your account</CardTitle>
+          <CardTitle className="text-xl">Crea tu cuenta</CardTitle>
           <CardDescription>
-            Enter your email below to create your account
+            Ingresa tus datos para registrarte
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                <Input id="name" type="text" placeholder="John Doe" required />
+                <FieldLabel htmlFor="name">Nombre completo</FieldLabel>
+                <Input id="name" type="text" placeholder="Juan Pérez" required />
               </Field>
               <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="email">Correo electrónico</FieldLabel>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="correo@ejemplo.com"
                   required
                 />
               </Field>
               <Field>
                 <Field className="grid grid-cols-2 gap-4">
                   <Field>
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
+                    <FieldLabel htmlFor="password">Contraseña</FieldLabel>
                     <Input id="password" type="password" required />
                   </Field>
                   <Field>
                     <FieldLabel htmlFor="confirm-password">
-                      Confirm Password
+                      Confirmar contraseña
                     </FieldLabel>
                     <Input id="confirm-password" type="password" required />
                   </Field>
                 </Field>
                 <FieldDescription>
-                  Must be at least 8 characters long.
+                  Debe tener al menos 8 caracteres.
                 </FieldDescription>
               </Field>
               <Field>
-                <Button type="submit">Create Account</Button>
+                <Button type="submit" className="w-full">
+                  Crear cuenta
+                </Button>
                 <FieldDescription className="text-center">
-                  Already have an account? <a href="#">Sign in</a>
+                  ¿Ya tienes cuenta?{" "}
+                  <a href="#" className="underline underline-offset-4 hover:text-primary">
+                    Inicia sesión
+                  </a>
                 </FieldDescription>
               </Field>
             </FieldGroup>
           </form>
         </CardContent>
       </Card>
-      <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+      <FieldDescription className="px-6 text-center text-xs text-muted-foreground">
+        Al continuar, aceptas nuestros{" "}
+        <a href="#" className="underline underline-offset-4 hover:text-primary">
+          Términos de servicio
+        </a>{" "}
+        y{" "}
+        <a href="#" className="underline underline-offset-4 hover:text-primary">
+          Política de privacidad
+        </a>
+        .
       </FieldDescription>
     </div>
   )

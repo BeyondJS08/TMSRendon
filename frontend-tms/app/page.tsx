@@ -1,18 +1,46 @@
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
+    <div className="flex min-h-svh flex-col items-center justify-center bg-gradient-to-br from-primary/10 via-background to-primary/5 p-6">
+      <div className="flex flex-col items-center gap-8 text-center">
+        <img
+          src="/TR.webp"
+          alt="TransRendon"
+          className="h-20 w-auto rounded-xl"
+        />
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold tracking-tight text-primary">
+            TMSRendon
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Sistema de gestión de transporte · TransRendon
+          </p>
         </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle>Bienvenido</CardTitle>
+            <CardDescription>
+              Accede al sistema para administrar tu flota, operaciones y más.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-3">
+            <Button asChild className="w-full">
+              <Link href="/login">Iniciar sesión</Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/signup">Crear cuenta</Link>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
