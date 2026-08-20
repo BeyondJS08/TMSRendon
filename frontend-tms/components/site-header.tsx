@@ -6,10 +6,12 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { getVariantFromPath, roles } from "@/lib/dashboard-config"
+import { getHeaderTitle } from "@/lib/dashboard/module-config"
 
 export function SiteHeader() {
   const pathname = usePathname()
   const variant = getVariantFromPath(pathname)
+  const title = getHeaderTitle(pathname)
 
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -19,7 +21,7 @@ export function SiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">{variant.title}</h1>
+        <h1 className="text-base font-medium">{title}</h1>
         <div className="ml-auto flex items-center gap-2">
           <Badge variant="secondary">Vista previa</Badge>
           <Badge variant="outline">{roles[variant.role].label}</Badge>

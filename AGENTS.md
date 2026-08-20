@@ -1,5 +1,8 @@
 # AGENTS.md
 
+## TMSRendon (TMS + ERP + IMS)
+**TMSRendon** is an enterprise-grade Transportation Management System (TMS), Enterprise Resource Planning (ERP) and Inventory Management System (IMS) built specifically for a trucking company in Mexico named TransRendon (Trucks, tortons, and heavy transport units).
+
 ## Technical Stack
 - Frontend: Next.js + Tailwind + shadcn/ui + React Query
 - Backend: NestJS + TypeScript
@@ -10,7 +13,7 @@
 - Authentication: Supabase Auth
 - Deployment: Vercel (Frontend) + VPS Ubuntu (Database, Backend and Caching)
 - APIs: PAC API (Facturama), Samsara/Geotab API, CONTPAQi
-- 
+
 ## Architecture & Development Approach
 - **Modular Monolith:** One repo. Separate domains by folders (`/modules/operations`, `/modules/hr`, `/modules/invoicing`, etc.). Share DB models but isolate business logic. Split to microservices later only if needed.
 - **API-First Design:** RESTful endpoints with OpenAPI docs. All external integrations go through dedicated adapters (e.g., `SatAdapter`, `TelematicsAdapter`).

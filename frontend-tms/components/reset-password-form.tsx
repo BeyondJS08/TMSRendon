@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
-export function SignupForm({
+export function ResetPasswordForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -30,36 +30,25 @@ export function SignupForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Crea tu cuenta</CardTitle>
+          <CardTitle className="text-xl">Crea una nueva contraseña</CardTitle>
           <CardDescription>
-            Ingresa tus datos para registrarte
+            Elige una contraseña segura para tu cuenta
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form
             onSubmit={(event) => {
               event.preventDefault()
-              router.push("/")
+              router.push("/login")
             }}
           >
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name">Nombre completo</FieldLabel>
-                <Input id="name" type="text" placeholder="Juan Pérez" required />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="email">Correo electrónico</FieldLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="correo@ejemplo.com"
-                  required
-                />
-              </Field>
-              <Field>
                 <Field className="grid grid-cols-2 gap-4">
                   <Field>
-                    <FieldLabel htmlFor="password">Contraseña</FieldLabel>
+                    <FieldLabel htmlFor="password">
+                      Nueva contraseña
+                    </FieldLabel>
                     <Input id="password" type="password" required />
                   </Field>
                   <Field>
@@ -75,10 +64,10 @@ export function SignupForm({
               </Field>
               <Field>
                 <Button type="submit" className="w-full">
-                  Crear cuenta
+                  Restablecer contraseña
                 </Button>
                 <FieldDescription className="text-center">
-                  ¿Ya tienes cuenta?{" "}
+                  ¿Recordaste tu contraseña?{" "}
                   <Link
                     href="/login"
                     className="underline underline-offset-4 hover:text-primary"

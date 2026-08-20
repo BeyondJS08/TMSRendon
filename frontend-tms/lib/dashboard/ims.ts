@@ -14,10 +14,10 @@ import {
 import {
   makeSeries,
   panelItem,
-  placeholderUrl as url,
   variantTitle,
   type DashboardVariant,
 } from "./core"
+import { moduleUrl } from "./module-types"
 
 export const imsVariants: DashboardVariant[] = [
   // ---------------------------- IMS · Superadministrador -------------------
@@ -27,14 +27,14 @@ export const imsVariants: DashboardVariant[] = [
     title: variantTitle("ims", "superadmin"),
     navMain: [
       panelItem("ims", "superadmin"),
-      { title: "Inventario", url, icon: BoxesIcon },
-      { title: "Refacciones", url, icon: PackageIcon },
-      { title: "Mantenimiento", url, icon: WrenchIcon },
-      { title: "Órdenes de compra", url, icon: ShoppingCartIcon },
-      { title: "Proveedores", url, icon: WarehouseIcon },
-      { title: "Alertas y umbrales", url, icon: BellRingIcon },
-      { title: "Usuarios", url, icon: UserCogIcon },
-      { title: "Auditoría", url, icon: HistoryIcon },
+      { title: "Inventario", url: moduleUrl("ims", "superadmin", "inventario"), icon: BoxesIcon },
+      { title: "Refacciones", url: moduleUrl("ims", "superadmin", "refacciones"), icon: PackageIcon },
+      { title: "Mantenimiento", url: moduleUrl("ims", "superadmin", "mantenimiento"), icon: WrenchIcon },
+      { title: "Órdenes de compra", url: moduleUrl("ims", "superadmin", "ordenes-compra"), icon: ShoppingCartIcon },
+      { title: "Proveedores", url: moduleUrl("ims", "superadmin", "proveedores"), icon: WarehouseIcon },
+      { title: "Alertas y umbrales", url: moduleUrl("ims", "superadmin", "alertas"), icon: BellRingIcon },
+      { title: "Usuarios", url: moduleUrl("ims", "superadmin", "usuarios"), icon: UserCogIcon },
+      { title: "Auditoría", url: moduleUrl("ims", "superadmin", "auditoria"), icon: HistoryIcon },
     ],
     kpis: [
       {
@@ -103,12 +103,12 @@ export const imsVariants: DashboardVariant[] = [
     title: variantTitle("ims", "admin"),
     navMain: [
       panelItem("ims", "admin"),
-      { title: "Inventario", url, icon: BoxesIcon },
-      { title: "Refacciones", url, icon: PackageIcon },
-      { title: "Mantenimiento", url, icon: WrenchIcon },
-      { title: "Órdenes de compra", url, icon: ShoppingCartIcon },
-      { title: "Proveedores", url, icon: WarehouseIcon },
-      { title: "Alertas", url, icon: BellRingIcon },
+      { title: "Inventario", url: moduleUrl("ims", "admin", "inventario"), icon: BoxesIcon },
+      { title: "Refacciones", url: moduleUrl("ims", "admin", "refacciones"), icon: PackageIcon },
+      { title: "Mantenimiento", url: moduleUrl("ims", "admin", "mantenimiento"), icon: WrenchIcon },
+      { title: "Órdenes de compra", url: moduleUrl("ims", "admin", "ordenes-compra"), icon: ShoppingCartIcon },
+      { title: "Proveedores", url: moduleUrl("ims", "admin", "proveedores"), icon: WarehouseIcon },
+      { title: "Alertas", url: moduleUrl("ims", "admin", "alertas"), icon: BellRingIcon },
     ],
     kpis: [
       {
@@ -177,10 +177,10 @@ export const imsVariants: DashboardVariant[] = [
     title: variantTitle("ims", "user"),
     navMain: [
       panelItem("ims", "user"),
-      { title: "Existencias", url, icon: PackageSearchIcon },
-      { title: "Mis solicitudes", url, icon: ClipboardListIcon },
-      { title: "Órdenes de trabajo", url, icon: WrenchIcon },
-      { title: "Avisos", url, icon: BellRingIcon },
+      { title: "Existencias", url: moduleUrl("ims", "user", "existencias"), icon: PackageSearchIcon },
+      { title: "Mis solicitudes", url: moduleUrl("ims", "user", "mis-solicitudes"), icon: ClipboardListIcon },
+      { title: "Órdenes de trabajo", url: moduleUrl("ims", "user", "ordenes-trabajo"), icon: WrenchIcon },
+      { title: "Avisos", url: moduleUrl("ims", "user", "avisos"), icon: BellRingIcon },
     ],
     kpis: [
       {

@@ -15,10 +15,10 @@ import {
 import {
   makeSeries,
   panelItem,
-  placeholderUrl as url,
   variantTitle,
   type DashboardVariant,
 } from "./core"
+import { moduleUrl } from "./module-types"
 
 export const tmsVariants: DashboardVariant[] = [
   // ---------------------------- TMS · Superadministrador -------------------
@@ -28,15 +28,15 @@ export const tmsVariants: DashboardVariant[] = [
     title: variantTitle("tms", "superadmin"),
     navMain: [
       panelItem("tms", "superadmin"),
-      { title: "Viajes", url, icon: RouteIcon },
-      { title: "Flota y unidades", url, icon: TruckIcon },
-      { title: "Conductores", url, icon: UsersIcon },
-      { title: "GPS y telemática", url, icon: SatelliteIcon },
-      { title: "Carta Porte", url, icon: FileTextIcon },
-      { title: "Reportes", url, icon: FileChartColumnIcon },
-      { title: "Usuarios y roles", url, icon: UserCogIcon },
-      { title: "Auditoría", url, icon: HistoryIcon },
-      { title: "Configuración", url, icon: Settings2Icon },
+      { title: "Viajes", url: moduleUrl("tms", "superadmin", "viajes"), icon: RouteIcon },
+      { title: "Flota y unidades", url: moduleUrl("tms", "superadmin", "flota"), icon: TruckIcon },
+      { title: "Conductores", url: moduleUrl("tms", "superadmin", "conductores"), icon: UsersIcon },
+      { title: "GPS y telemática", url: moduleUrl("tms", "superadmin", "gps-telematica"), icon: SatelliteIcon },
+      { title: "Carta Porte", url: moduleUrl("tms", "superadmin", "carta-porte"), icon: FileTextIcon },
+      { title: "Reportes", url: moduleUrl("tms", "superadmin", "reportes"), icon: FileChartColumnIcon },
+      { title: "Usuarios y roles", url: moduleUrl("tms", "superadmin", "usuarios-roles"), icon: UserCogIcon },
+      { title: "Auditoría", url: moduleUrl("tms", "superadmin", "auditoria"), icon: HistoryIcon },
+      { title: "Configuración", url: moduleUrl("tms", "superadmin", "configuracion"), icon: Settings2Icon },
     ],
     kpis: [
       {
@@ -106,13 +106,13 @@ export const tmsVariants: DashboardVariant[] = [
     title: variantTitle("tms", "admin"),
     navMain: [
       panelItem("tms", "admin"),
-      { title: "Viajes", url, icon: RouteIcon },
-      { title: "Flota y unidades", url, icon: TruckIcon },
-      { title: "Conductores", url, icon: UsersIcon },
-      { title: "GPS y telemática", url, icon: SatelliteIcon },
-      { title: "Carta Porte", url, icon: FileTextIcon },
-      { title: "Incidencias", url, icon: SirenIcon },
-      { title: "Reportes", url, icon: FileChartColumnIcon },
+      { title: "Viajes", url: moduleUrl("tms", "admin", "viajes"), icon: RouteIcon },
+      { title: "Flota y unidades", url: moduleUrl("tms", "admin", "flota"), icon: TruckIcon },
+      { title: "Conductores", url: moduleUrl("tms", "admin", "conductores"), icon: UsersIcon },
+      { title: "GPS y telemática", url: moduleUrl("tms", "admin", "gps-telematica"), icon: SatelliteIcon },
+      { title: "Carta Porte", url: moduleUrl("tms", "admin", "carta-porte"), icon: FileTextIcon },
+      { title: "Incidencias", url: moduleUrl("tms", "admin", "incidencias"), icon: SirenIcon },
+      { title: "Reportes", url: moduleUrl("tms", "admin", "reportes"), icon: FileChartColumnIcon },
     ],
     kpis: [
       {
@@ -182,10 +182,10 @@ export const tmsVariants: DashboardVariant[] = [
     title: variantTitle("tms", "user"),
     navMain: [
       panelItem("tms", "user"),
-      { title: "Mis viajes", url, icon: RouteIcon },
-      { title: "Entregas", url, icon: PackageIcon },
-      { title: "Documentos", url, icon: FileTextIcon },
-      { title: "Incidencias", url, icon: SirenIcon },
+      { title: "Mis viajes", url: moduleUrl("tms", "user", "mis-viajes"), icon: RouteIcon },
+      { title: "Entregas", url: moduleUrl("tms", "user", "entregas"), icon: PackageIcon },
+      { title: "Documentos", url: moduleUrl("tms", "user", "documentos"), icon: FileTextIcon },
+      { title: "Incidencias", url: moduleUrl("tms", "user", "incidencias"), icon: SirenIcon },
     ],
     kpis: [
       {

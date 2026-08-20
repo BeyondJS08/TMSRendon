@@ -1,4 +1,8 @@
-import { cn } from "@/lib/utils"
+"use client"
+
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -14,11 +18,14 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter()
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -29,7 +36,12 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault()
+              router.push("/dashboard")
+            }}
+          >
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Correo electrónico</FieldLabel>
@@ -43,12 +55,12 @@ export function LoginForm({
               <Field>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Contraseña</FieldLabel>
-                  <a
-                    href="#"
+                  <Link
+                    href="/forgot-password"
                     className="ml-auto text-sm underline-offset-4 hover:underline"
                   >
                     ¿Olvidaste tu contraseña?
-                  </a>
+                  </Link>
                 </div>
                 <Input id="password" type="password" required />
               </Field>
@@ -58,26 +70,18 @@ export function LoginForm({
                 </Button>
                 <FieldDescription className="text-center">
                   ¿No tienes cuenta?{" "}
-                  <a href="#" className="underline underline-offset-4 hover:text-primary">
+                  <Link
+                    href="/signup"
+                    className="underline underline-offset-4 hover:text-primary"
+                  >
                     Regístrate
-                  </a>
+                  </Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
           </form>
         </CardContent>
       </Card>
-      <FieldDescription className="px-6 text-center text-xs text-muted-foreground">
-        Al continuar, aceptas nuestros{" "}
-        <a href="#" className="underline underline-offset-4 hover:text-primary">
-          Términos de servicio
-        </a>{" "}
-        y{" "}
-        <a href="#" className="underline underline-offset-4 hover:text-primary">
-          Política de privacidad
-        </a>
-        .
-      </FieldDescription>
     </div>
   )
 }

@@ -15,10 +15,10 @@ import {
 import {
   makeSeries,
   panelItem,
-  placeholderUrl as url,
   variantTitle,
   type DashboardVariant,
 } from "./core"
+import { moduleUrl } from "./module-types"
 
 export const erpVariants: DashboardVariant[] = [
   // ---------------------------- ERP · Superadministrador -------------------
@@ -28,15 +28,15 @@ export const erpVariants: DashboardVariant[] = [
     title: variantTitle("erp", "superadmin"),
     navMain: [
       panelItem("erp", "superadmin"),
-      { title: "Empleados", url, icon: UsersIcon },
-      { title: "Nómina", url, icon: BanknoteIcon },
-      { title: "Facturación CFDI", url, icon: ReceiptIcon },
-      { title: "Contabilidad", url, icon: CalculatorIcon },
-      { title: "Proveedores", url, icon: WarehouseIcon },
-      { title: "Reportes financieros", url, icon: FileChartColumnIcon },
-      { title: "Usuarios y permisos", url, icon: UserCogIcon },
-      { title: "Configuración fiscal", url, icon: LandmarkIcon },
-      { title: "Auditoría", url, icon: HistoryIcon },
+      { title: "Empleados", url: moduleUrl("erp", "superadmin", "empleados"), icon: UsersIcon },
+      { title: "Nómina", url: moduleUrl("erp", "superadmin", "nomina"), icon: BanknoteIcon },
+      { title: "Facturación CFDI", url: moduleUrl("erp", "superadmin", "facturacion-cfdi"), icon: ReceiptIcon },
+      { title: "Contabilidad", url: moduleUrl("erp", "superadmin", "contabilidad"), icon: CalculatorIcon },
+      { title: "Proveedores", url: moduleUrl("erp", "superadmin", "proveedores"), icon: WarehouseIcon },
+      { title: "Reportes financieros", url: moduleUrl("erp", "superadmin", "reportes-financieros"), icon: FileChartColumnIcon },
+      { title: "Usuarios y permisos", url: moduleUrl("erp", "superadmin", "usuarios-permisos"), icon: UserCogIcon },
+      { title: "Configuración fiscal", url: moduleUrl("erp", "superadmin", "configuracion-fiscal"), icon: LandmarkIcon },
+      { title: "Auditoría", url: moduleUrl("erp", "superadmin", "auditoria"), icon: HistoryIcon },
     ],
     kpis: [
       {
@@ -105,12 +105,12 @@ export const erpVariants: DashboardVariant[] = [
     title: variantTitle("erp", "admin"),
     navMain: [
       panelItem("erp", "admin"),
-      { title: "Empleados", url, icon: UsersIcon },
-      { title: "Nómina", url, icon: BanknoteIcon },
-      { title: "Facturación CFDI", url, icon: ReceiptIcon },
-      { title: "Contabilidad", url, icon: CalculatorIcon },
-      { title: "Proveedores", url, icon: WarehouseIcon },
-      { title: "Reportes financieros", url, icon: FileChartColumnIcon },
+      { title: "Empleados", url: moduleUrl("erp", "admin", "empleados"), icon: UsersIcon },
+      { title: "Nómina", url: moduleUrl("erp", "admin", "nomina"), icon: BanknoteIcon },
+      { title: "Facturación CFDI", url: moduleUrl("erp", "admin", "facturacion-cfdi"), icon: ReceiptIcon },
+      { title: "Contabilidad", url: moduleUrl("erp", "admin", "contabilidad"), icon: CalculatorIcon },
+      { title: "Proveedores", url: moduleUrl("erp", "admin", "proveedores"), icon: WarehouseIcon },
+      { title: "Reportes financieros", url: moduleUrl("erp", "admin", "reportes-financieros"), icon: FileChartColumnIcon },
     ],
     kpis: [
       {
@@ -179,9 +179,9 @@ export const erpVariants: DashboardVariant[] = [
     title: variantTitle("erp", "user"),
     navMain: [
       panelItem("erp", "user"),
-      { title: "Mis recibos", url, icon: ReceiptIcon },
-      { title: "Solicitudes y vacaciones", url, icon: CalendarDaysIcon },
-      { title: "Mis datos", url, icon: IdCardIcon },
+      { title: "Mis recibos", url: moduleUrl("erp", "user", "mis-recibos"), icon: ReceiptIcon },
+      { title: "Solicitudes y vacaciones", url: moduleUrl("erp", "user", "solicitudes-vacaciones"), icon: CalendarDaysIcon },
+      { title: "Mis datos", url: moduleUrl("erp", "user", "mis-datos"), icon: IdCardIcon },
     ],
     kpis: [
       {

@@ -6,7 +6,7 @@
 
 ---
 
-## Project Structure
+## Current Project Structure
 
 This project uses a monorepo layout:
 ```

@@ -1,5 +1,8 @@
 # CLAUDE.md
 
+## TMSRendon (TMS + ERP + IMS)
+**TMSRendon** is an enterprise-grade Transportation Management System (TMS), Enterprise Resource Planning (ERP) and Inventory Management System (IMS) built specifically for a trucking company in Mexico named TransRendon (Trucks, tortons, and heavy transport units).
+
 ## Technical Stack
 - Frontend: Next.js + Tailwind + shadcn/ui + React Query
 - Backend: NestJS + TypeScript
